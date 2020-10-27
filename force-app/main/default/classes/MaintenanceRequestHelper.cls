@@ -39,7 +39,7 @@ public with sharing class MaintenanceRequestHelper {
            newCaseList.add(newCase);
        }
        if (newCaseList.size() >0) {
-           insert newCaseList;           
+           insert newCaseList;
        }
    }   
 }

@@ -1,5 +1,5 @@
 /**
- * @description       : 
+ * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
  * @last modified on  : 10-27-2020

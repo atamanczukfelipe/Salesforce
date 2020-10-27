@@ -11,7 +11,7 @@
 public with sharing class MaintenanceRequestHelper {
 
     public static List<Case> updatedMaintenanceList ( List<Case> maintenanceRequests){
-        return [ SELECT ID, Equipament__r.Maintenance_Cycle__c,Type, Status, Vehicle__c, Subject, Equipament__c  FROM CASE WHERE ID=: maintenanceRequests];
+        return [ SELECT ID, Equipment__r.Maintenance_Cycle__c,Type, Status, Vehicle__c, Subject, Equipment__c  FROM CASE WHERE ID=: maintenanceRequests];
     }
     
     public static void updateWorkOrders( List<Case> maintenanceRequests, Map <Id, Case> mapOldRecords) {
@@ -35,10 +35,33 @@ public with sharing class MaintenanceRequestHelper {
         for(Case newMaintenanceRequest : maintenanceRequestsThatMetTheCriteria){
             //Create a new routine once the first one is closed, with same vehicle and equipment
             Case routineCheckupMaintenance = new Case();
-            
+            routineCheckupMaintenance.Vehicle__c = newMaintenanceRequest.Vehicle__c;
+            routineCheckupMaintenance.Equipment__c = newMaintenanceRequest.Equipment__c;
+            routineCheckupMaintenance.Type = 'Routin Maintenance';
+            routineCheckupMaintenance.Subject = String.isBlank(newMaintenanceRequest.Subject)?'New Routine' : newMaintenanceRequest.Subject;
+            routineCheckupMaintenance.Status = 'New';
+            routineCheckupMaintenance.Date_Reported__c = System.today();
+            if (mapMaintenanceIdWithCycleDays.containsKey(newMaintenanceRequest.Id)) {
+                routineCheckupMaintenance.Date_Due__c = System.today().addDays((Integer) mapMaintenanceIdWithCycleDays.get(newMaintenanceRequest.Id));
+            }else {
+                routineCheckupMaintenance.Date_Due__c = System.today().addDays((Integer) newMaintenanceRequest.Equipment__r.Maintenance_Cycle__c);
+            }
+            routineCheckupMaintenance.Old_Case__c = newMaintenanceRequest.Id;
+            //Add to the list
+            newMaintenanceListForRoutineCheckup.add(routineCheckupMaintenance);
         }
-        // TODO: Complete the method to update workorders
-        
-    }        
+        //insert the list 
+        insert newMaintenanceListForRoutineCheckup;
+        updateRelatedWorkParts( newMaintenanceListForRoutineCheckup);
+    }
+
+    //New maintence records are created, update the work parts
+    public static void updateRelatedParts (List<Case> createdMaintenances){
+        Map<Id, Id> mapNewMaintenancesWithClosedMaintenances = new Map<Id,Id> ();
+        for(Case newMaintenances : createdMaintenances){
+            mapNewMaintenancesWithClosedMaintenances.put(newMaintenances.Old_Case__c, newMaintenances.Id);
+        }
+
+    }
     
 }

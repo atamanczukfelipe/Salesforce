@@ -9,6 +9,17 @@
  * 1.0   10-27-2020   Felipe Atamanczuk   Initial Version
 **/
 trigger MaintenanceRequest on Case (before update, after update) {
-    // ToDo: Call MaintenanceRequestHelper.updateWorkOrders
-    //YEAH
+    Map<Id,Case> caseList = new Map<Id,Case>();
+    if(Trigger.isUpdate && Trigger.isAfter){
+        for (Case oCase : Trigger.new) {
+            if (oCase.IsClosed && (oCase.Type.equals('Repair') || oCase.Type.equals('Routine Maintenance'))) {
+                caseList.put(oCase.Id, oCase)
+            }
+            if (caseList.size() >0) {
+                //Remove this Later on
+                System.debug('Calling updateWorkOrders from MaintenanceRequestHelper Class');
+                MaintenanceRequestHelper.updateWorkOrders(caseList);
+            }
+        }
+    }
 }

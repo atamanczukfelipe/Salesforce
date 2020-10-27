@@ -13,7 +13,7 @@ trigger MaintenanceRequest on Case (before update, after update) {
     if(Trigger.isUpdate && Trigger.isAfter){
         for (Case oCase : Trigger.new) {
             if (oCase.IsClosed && (oCase.Type.equals('Repair') || oCase.Type.equals('Routine Maintenance'))) {
-                caseList.put(oCase.Id, oCase)
+                caseList.put(oCase.Id, oCase);
             }
             if (caseList.size() >0) {
                 //Remove this Later on

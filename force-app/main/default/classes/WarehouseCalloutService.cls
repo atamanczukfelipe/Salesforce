@@ -20,7 +20,7 @@ public with sharing class WarehouseCalloutService {
         httpreq.setEndpoint(WAREHOUSE_URL);
         httpreq.setMethod('GET');
 
-
+        //example from trailhead using @future callout
         public static void sendSMSAsync(String fromNbr, String toNbr, String m) {
             String results = sendSMS(fromNbr, toNbr, m);
             System.debug(results);

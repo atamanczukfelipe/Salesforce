@@ -16,8 +16,6 @@ trigger MaintenanceRequest on Case (before update, after update) {
                 caseList.put(oCase.Id, oCase);
             }
             if (caseList.size() >0) {
-                //Remove this Later on
-                System.debug('Calling updateWorkOrders from MaintenanceRequestHelper Class');
                 MaintenanceRequestHelper.updateWorkOrders(caseList);
             }
         }

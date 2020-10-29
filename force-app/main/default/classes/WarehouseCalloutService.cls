@@ -21,20 +21,19 @@ public with sharing class WarehouseCalloutService {
         httpreq.setMethod('GET');
         HttpResponse httpresponse = http.send(httpreq);
 
-        //checking the response, to see if everything is ok
+        //checking the response code, to see if its equals 200, if true everything is ok
         if (httpresponse.getStatusCode() == 200) {
-            List<Object> jsonResponse = (List<Object>) JSON.deserializeUntyped(httpresponse.getBody())
+            //Deserializes the specified JSON string into collections of primitive data types.
             
         }
 
         //example from trailhead using @future callout
-        public static void sendSMSAsync(String fromNbr, String toNbr, String m) {
+        /**public static void sendSMSAsync(String fromNbr, String toNbr, String m) {
             String results = sendSMS(fromNbr, toNbr, m);
             System.debug(results);
-        }
-        
+        }      
         //ToDo: complete this method to make the callout (using @future) to the
-        //      REST endpoint and update equipment on hand.
+        //      REST endpoint and update equipment on hand.**/ 
                 
     }
 }

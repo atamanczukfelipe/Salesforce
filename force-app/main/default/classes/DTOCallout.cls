@@ -9,14 +9,12 @@
  * 1.0   10-30-2020   Felipe Atamanczuk   Initial Version
 **/
 public with sharing class DTOCallout {
-    public DTOCallout() {
-        public String id;
-        public Boolean replacement;
-        public Integer quantity;
-        public String name;
-        public Integer maintenanceperiod;
-        public Integer lifespan;
-        public Decimal cost;
-        public Integer sku;
-    }
+        public String extId {get; set;}
+        public Boolean replacement {get; set;}
+        public Integer quantity {get; set;}
+        public String name {get; set;}
+        public Integer maintenanceperiod {get; set;}
+        public Integer lifespan {get; set;}
+        public Decimal cost {get; set;}
+        public Integer sku {get; set;}
 }

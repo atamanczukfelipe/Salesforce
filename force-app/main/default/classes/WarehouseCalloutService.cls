@@ -2,7 +2,7 @@
  * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
- * @last modified on  : 10-29-2020
+ * @last modified on  : 10-30-2020
  * @last modified by  : Felipe Atamanczuk
  * Modifications Log 
  * Ver   Date         Author              Modification
@@ -24,7 +24,11 @@ public with sharing class WarehouseCalloutService {
         //checking the response code, to see if its equals 200, if true everything is ok
         if (httpresponse.getStatusCode() == 200) {
             //Deserializes the specified JSON string into collections of primitive data types.
+            stringmsg = httpresponse.getBody();
+            List<String> deserializeResults = (List<String>.class) JSON.deserialize(stringmsg, List<String>.class);
             
+            //List<Customer> deserializeResults = (List<Customer>.class) JSON.deserialize(response, List<Customer>.class);
+
         }
 
         //example from trailhead using @future callout

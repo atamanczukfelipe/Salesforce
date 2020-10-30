@@ -20,21 +20,20 @@ public with sharing class WarehouseCalloutService {
         httpreq.setEndpoint(WAREHOUSE_URL);
         httpreq.setMethod('GET');
         HttpResponse httpresponse = http.send(httpreq);
-
+        DTOCallout dtocall = new DTOCallout();
+        String newbody;
+       
         //checking the response code, to see if its equals 200, if true everything is ok
         if (httpresponse.getStatusCode() == 200) {
             //Deserializes the specified JSON string into collections of primitive data types.
-            stringmsg = httpresponse.getBody();
-            List<String> deserializeResults = (List<String>.class) JSON.deserialize(stringmsg, List<String>.class);
+            newbody = httpresponse.getBody().replace('_id', 'extId');
+            List<DTOCallout> recived = (List<DTOCallout>) JSON.deserialize(newbody, List<DTOCallout>.class);
+        
+            
+            System.debug('~~' +recived);
             
             //List<Customer> deserializeResults = (List<Customer>.class) JSON.deserialize(response, List<Customer>.class);
 
-        }
-
-        //example from trailhead using @future callout
-        /**public static void sendSMSAsync(String fromNbr, String toNbr, String m) {
-            String results = sendSMS(fromNbr, toNbr, m);
-            System.debug(results);
         }      
         //ToDo: complete this method to make the callout (using @future) to the
         //      REST endpoint and update equipment on hand.**/ 

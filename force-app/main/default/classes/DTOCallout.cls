@@ -1,5 +1,5 @@
 /**
- * @description       : 
+ * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
  * @last modified on  : 10-30-2020
@@ -10,12 +10,13 @@
 **/
 public with sharing class DTOCallout {
     public DTOCallout() {
-        public String Status;
-        public String Message;
-        public String FirstName;
-        public String LastName;
-        public String Email;
-        public String Phone;
-
+        public String id;
+        public Boolean replacement;
+        public Integer quantity;
+        public String name;
+        public Integer maintenanceperiod;
+        public Integer lifespan;
+        public Decimal cost;
+        public Integer sku;
     }
 }

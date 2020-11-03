@@ -2,7 +2,7 @@
  * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
- * @last modified on  : 10-30-2020
+ * @last modified on  : 11-03-2020
  * @last modified by  : Felipe Atamanczuk
  * Modifications Log 
  * Ver   Date         Author              Modification
@@ -28,15 +28,23 @@ public with sharing class WarehouseCalloutService {
             //Deserializes the specified JSON string into collections of primitive data types.
             newbody = httpresponse.getBody().replace('_id', 'extId');
             List<DTOCallout> recived = (List<DTOCallout>) JSON.deserialize(newbody, List<DTOCallout>.class);
-        
             
-            System.debug('~~' +recived);
-            
-            //List<Customer> deserializeResults = (List<Customer>.class) JSON.deserialize(response, List<Customer>.class);
-
+            List<Product2> lstEquipmentUp = new List<Product2> ();
+            for (DTOCallout iEquipment : recived) {
+                Product2 prod = new Product2 ();
+                prod.ProductCode = iEquipment.extId;
+                prod.Replacement_Part__c = iEquipment.replacement;
+                prod.Current_Inventory__c = iEquipment.quantity;
+                prod.Name = iEquipment.name;
+                prod.Maintenance_Cycle__c = iEquipment.maintenanceperiod;
+                prod.Lifespan_Months__c = iEquipment.lifespan;
+                prod.Cost__c = iEquipment.cost;
+                prod.Warehouse_SKU__c = iEquipment.sku;
+                lstEquipmentUp.add(prod);
+            }
+            if (lstEquipmentUp.size() > 0) {
+                upsert lstEquipmentUp; //upsert ->upadate or create records
+            }
         }      
-        //ToDo: complete this method to make the callout (using @future) to the
-        //      REST endpoint and update equipment on hand.**/ 
-                
     }
 }

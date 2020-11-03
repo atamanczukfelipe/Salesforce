@@ -16,7 +16,7 @@ public with sharing class DTOCallout {
         public Integer maintenanceperiod {get; set;}
         public Integer lifespan {get; set;}
         public Decimal cost {get; set;}
-        public Integer sku {get; set;}
+        public String sku {get; set;}
         public DTOCallout(){
        
         }

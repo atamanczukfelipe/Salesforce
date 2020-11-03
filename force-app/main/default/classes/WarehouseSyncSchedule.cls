@@ -14,10 +14,3 @@ global class WarehouseSyncSchedule implements Schedulable {
         WarehouseCalloutService.runWarehouseEquipmentSync();
     }
 }
-
-/**Apex Trailhead Example
- * global class SomeClass implements Schedulable {
-    global void execute(SchedulableContext ctx) {
-        // awesome code here
-    }
-}*/

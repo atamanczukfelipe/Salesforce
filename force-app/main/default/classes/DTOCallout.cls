@@ -2,7 +2,7 @@
  * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
- * @last modified on  : 10-30-2020
+ * @last modified on  : 11-03-2020
  * @last modified by  : Felipe Atamanczuk
  * Modifications Log 
  * Ver   Date         Author              Modification
@@ -18,6 +18,6 @@ public with sharing class DTOCallout {
         public Decimal cost {get; set;}
         public Integer sku {get; set;}
         public DTOCallout(){
-                
+       
         }
 }

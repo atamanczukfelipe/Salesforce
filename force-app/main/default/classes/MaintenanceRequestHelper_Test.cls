@@ -13,7 +13,7 @@ public class MaintenanceRequestHelper_Test{
     @isTest
     public static void caseTrigger_positiveCase(){
         //criar dado, inserir, modificar, update
-        Case[] c = CaseDataFactory.createCasePositive(1,10);
+        Case[] c = CaseDataFactory.createCasePositive(200,10);
         insert c;
         Test.startTest();
         //aqui fazer alteração

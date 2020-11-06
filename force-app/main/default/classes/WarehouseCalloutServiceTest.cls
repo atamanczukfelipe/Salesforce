@@ -16,5 +16,7 @@ private class WarehouseCalloutServiceTest {
         Test.setMock(HttpCalloutMock.class, new WarehouseCalloutServiceMock ());
         WarehouseCalloutService.runWarehouseEquipmentSync();
         Test.stopTest();
+        List<Product2> lstEquip = [SELECT Id FROM Product2];
+        System.assert(lstEquip.size() >0, 'DONT Wokr as expected');
     }
 }

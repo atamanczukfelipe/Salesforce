@@ -2,7 +2,7 @@
  * @description       : Apex Specialist Superbadge
  * @author            : Felipe Atamanczuk
  * @group             : 
- * @last modified on  : 11-04-2020
+ * @last modified on  : 11-06-2020
  * @last modified by  : Felipe Atamanczuk
  * Modifications Log 
  * Ver   Date         Author              Modification
@@ -10,27 +10,21 @@
 **/
 @isTest
 public class MaintenanceRequestHelper_Test{
-    static List<Case> caseLst = new List<Case> ();
-    static List<Product2> prodLst = new List<Product2> ();
-    static List<Work_Part__c> workpartLst = new List<Work_Part__c> ();
-
-    
     @isTest
     public static void caseTrigger_positiveCase(){
         //criar dado, inserir, modificar, update
+        Case[] c = CaseDataFactory.createCasePositive(1,10);
+        insert c;
+        Test.startTest();
+        //aqui fazer alteração
+        c[0].Status = 'Closed';
+        c[0].Type = 'Repair';
 
-    } 
-    
-    @isTest
-    public static void caseTrigger_negativeCase(){
-        
-    } 
-    
-    @isTest
-    public static void caseTrigger_bulkCase(){
-        
-    } 
+        update c;
 
+        Test.stopTest();
+        List<Case> testcase = [SELECT Id FROM Case WHERE Type =: 'Routine Maintenance'];
 
-    
+        System.assertEquals(1, testcase.size());
+    }  
 }
